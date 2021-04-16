@@ -1,13 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace XXXXX.Models
+namespace GameDatabase.Models
 {
-	public class XXXXXContext : DbContext
+	public class GameDatabaseContext : DbContext
 	{
 		//public virtual DbSet<XXXXX> YYYYY { get; set; }
 		//public virtual DbSet<XXXXX> YYYYY { get; set; }
 
-		public XXXXXContext(DbContextOptions options) : base(options) { }
+		public GameDatabaseContext(DbContextOptions options) : base(options) { }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{

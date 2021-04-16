@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace XXXXX.Controllers
+namespace GameDatabase.Controllers
 {
 	public class HomeController : Controller
 	{
