@@ -33,5 +33,14 @@ namespace GameDatabase.Controllers
 			_db.SaveChanges();
 			return RedirectToAction("Index");
 		}
+
+		public ActionResult Details(int id)
+		{
+			Developer thisDeveloper = _db.Developers
+				.Include(developer => developer.Games)
+				.ThenInclude(join => join.Game)
+				.FirstOrDefault(developer => developer.DeveloperId == id);
+			return View(thisDeveloper);
+		}
 	}
 }

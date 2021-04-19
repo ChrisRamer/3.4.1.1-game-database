@@ -1,0 +1,32 @@
+@{
+	Layout = "_Layout";
+}
+
+@model GameDatabase.Models.Developer
+
+<h2>Details for @Html.DisplayFor(model => model.Name)</h2>
+
+<hr />
+
+@if (Model.Games.Count == 0)
+{
+	<p>This developer does not have any games.</p>
+}
+else
+{
+	<h4>Games:</h4>
+	<ul>
+		@foreach (var join in Model.Games)
+		{
+			<li>@join.Developer.Name</li>
+		}
+	</ul>
+}
+
+<hr />
+
+<p>
+	@Html.ActionLink("View all developers", "Index")
+	|
+	@Html.ActionLink("Go to homepage", "index", "Home")
+</p>

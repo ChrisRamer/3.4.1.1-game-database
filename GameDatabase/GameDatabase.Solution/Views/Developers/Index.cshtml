@@ -16,7 +16,7 @@
 
 @foreach (Developer developer in Model)
 {
-	<li>@developer.Name</li>
+	<li>@Html.ActionLink($"{developer.Name}", "Details", new { id = developer.DeveloperId })</li>
 }
 
 <hr />
