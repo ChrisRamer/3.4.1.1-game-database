@@ -4,8 +4,9 @@ namespace GameDatabase.Models
 {
 	public class GameDatabaseContext : DbContext
 	{
-		//public virtual DbSet<XXXXX> YYYYY { get; set; }
-		//public virtual DbSet<XXXXX> YYYYY { get; set; }
+		public virtual DbSet<Developer> Developers { get; set; }
+		public virtual DbSet<Game> Games { get; set; }
+		public virtual DbSet<DeveloperGame> DeveloperGame { get; set; }
 
 		public GameDatabaseContext(DbContextOptions options) : base(options) { }
 
