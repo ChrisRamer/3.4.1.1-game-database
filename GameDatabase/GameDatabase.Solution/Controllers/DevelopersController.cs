@@ -20,5 +20,18 @@ namespace GameDatabase.Controllers
 			List<Developer> model = _db.Developers.ToList();
 			return View(model);
 		}
+
+		public ActionResult Create()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public ActionResult Create(Developer developer)
+		{
+			_db.Developers.Add(developer);
+			_db.SaveChanges();
+			return RedirectToAction("Index");
+		}
 	}
 }
