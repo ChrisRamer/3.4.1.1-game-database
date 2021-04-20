@@ -42,5 +42,19 @@ namespace GameDatabase.Controllers
 				.FirstOrDefault(developer => developer.DeveloperId == id);
 			return View(thisDeveloper);
 		}
+
+		public ActionResult Edit(int id)
+		{
+			Developer thisDeveloper = _db.Developers.FirstOrDefault(developer => developer.DeveloperId == id);
+			return View(thisDeveloper);
+		}
+
+		[HttpPost]
+		public ActionResult Edit(Developer developer)
+		{
+			_db.Entry(developer).State = EntityState.Modified;
+			_db.SaveChanges();
+			return RedirectToAction("Index");
+		}
 	}
 }
