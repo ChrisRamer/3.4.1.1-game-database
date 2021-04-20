@@ -38,5 +38,11 @@ namespace GameDatabase.Controllers
 			_db.SaveChanges();
 			return RedirectToAction("Index");
 		}
+
+		public ActionResult Details(int id)
+		{
+			Game thisGame = _db.Games.FirstOrDefault(game => game.GameId == id);
+			return View(thisGame);
+		}
 	}
 }
