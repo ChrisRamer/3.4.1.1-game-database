@@ -56,5 +56,20 @@ namespace GameDatabase.Controllers
 			_db.SaveChanges();
 			return RedirectToAction("Index");
 		}
+
+		public ActionResult Delete(int id)
+		{
+			Developer thisDeveloper = _db.Developers.FirstOrDefault(developer => developer.DeveloperId == id);
+			return View(thisDeveloper);
+		}
+
+		[HttpPost, ActionName("Delete")]
+		public ActionResult DeleteConfirmed(int id)
+		{
+			Developer thisDeveloper = _db.Developers.FirstOrDefault(developer => developer.DeveloperId == id);
+			_db.Developers.Remove(thisDeveloper);
+			_db.SaveChanges();
+			return RedirectToAction("Index");
+		}
 	}
 }
