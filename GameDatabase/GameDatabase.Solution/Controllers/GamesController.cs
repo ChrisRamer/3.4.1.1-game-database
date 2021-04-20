@@ -44,5 +44,25 @@ namespace GameDatabase.Controllers
 			Game thisGame = _db.Games.FirstOrDefault(game => game.GameId == id);
 			return View(thisGame);
 		}
+
+		public ActionResult Edit (int id)
+		{
+			Game thisGame = _db.Games.FirstOrDefault(game => game.GameId == id);
+			ViewBag.DeveloperId = new SelectList(_db.Developers, "DeveloperId", "Name");
+			return View(thisGame);
+		}
+
+		[HttpPost]
+		public ActionResult Edit(Game game, int developerId)
+		{
+			bool duplicate = _db.DeveloperGame.Any(devGame => devGame.DeveloperId == developerId && devGame.GameId == game.GameId);
+			if (developerId != 0 && !duplicate)
+			{
+				_db.DeveloperGame.Add(new DeveloperGame() { DeveloperId = developerId, GameId = game.GameId});
+			}
+			_db.Entry(game).State = EntityState.Modified;
+			_db.SaveChanges();
+			return RedirectToAction("Index");
+		}
 	}
 }
