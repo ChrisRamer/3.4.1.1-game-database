@@ -20,5 +20,23 @@ namespace GameDatabase.Controllers
 		{
 			return View(_db.Games.ToList());
 		}
+
+		public ActionResult Create()
+		{
+			ViewBag.DeveloperId = new SelectList(_db.Developers, "DeveloperId", "Name");
+			return View();
+		}
+
+		[HttpPost]
+		public ActionResult Create(Game game, int DeveloperId)
+		{
+			_db.Games.Add(game);
+			if (DeveloperId != 0)
+			{
+				_db.DeveloperGame.Add(new DeveloperGame() { DeveloperId = DeveloperId, GameId = game.GameId });
+			}
+			_db.SaveChanges();
+			return RedirectToAction("Index");
+		}
 	}
 }
