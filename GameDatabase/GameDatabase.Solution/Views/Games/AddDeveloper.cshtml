@@ -1,0 +1,28 @@
+@{
+	Layout = "_Layout";
+}
+
+@model GameDatabase.Models.Game
+
+<h2 id="title">Add a developer to @Html.DisplayFor(model => model.Name)</h2>
+
+<hr />
+
+@using (Html.BeginForm())
+{
+	@Html.HiddenFor(model => model.GameId)
+
+	@Html.Label("Developer")
+	<br>
+	@Html.DropDownList("DeveloperId")
+	<br><br>
+	<input type="submit" value="Save" />
+}
+
+<hr />
+
+<p>
+	@Html.ActionLink("View all games", "Index")
+	|
+	@Html.ActionLink("Go to homepage", "Index", "Home")
+</p>
