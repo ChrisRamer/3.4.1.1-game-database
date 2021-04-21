@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 using GameDatabase.Models;
 
@@ -41,7 +40,10 @@ namespace GameDatabase.Controllers
 
 		public ActionResult Details(int id)
 		{
-			Game thisGame = _db.Games.FirstOrDefault(game => game.GameId == id);
+			Game thisGame = _db.Games
+				.Include(game => game.Developers)
+				.ThenInclude(join => join.Developer)
+				.FirstOrDefault(game => game.GameId == id);
 			return View(thisGame);
 		}
 
@@ -95,6 +97,15 @@ namespace GameDatabase.Controllers
 			{
 				_db.DeveloperGame.Add(new DeveloperGame() { DeveloperId = developerId, GameId = game.GameId });
 			}
+			_db.SaveChanges();
+			return RedirectToAction("Index");
+		}
+
+		[HttpPost]
+		public ActionResult DeleteDeveloper(int joinId)
+		{
+			DeveloperGame joinEntry = _db.DeveloperGame.FirstOrDefault(entry => entry.DeveloperGameId == joinId);
+			_db.DeveloperGame.Remove(joinEntry);
 			_db.SaveChanges();
 			return RedirectToAction("Index");
 		}
