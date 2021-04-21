@@ -14,11 +14,11 @@
 }
 else
 {
-	<h4>Games:</h4>
+	<h4><u>Games</u></h4>
 	<ul>
 		@foreach (var join in Model.Games)
 		{
-			<li>@join.Developer.Name</li>
+			<li>@Html.ActionLink($"{join.Game.Name}", "Details", "Games", new { id = join.Game.GameId })</li>
 		}
 	</ul>
 }
